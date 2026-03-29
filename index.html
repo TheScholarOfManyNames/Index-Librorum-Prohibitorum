@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Digital Library</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>📚 My Digital Library</h1>
+    <p>Browse, search, and explore our collection.</p>
+  </header>
+
+  <!-- Search & Filter Controls -->
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search by title or author..." />
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="Technology">Technology</option>
+      <option value="Science">Science</option>
+      <option value="History">History</option>
+      <option value="Arts">Arts</option>
+    </select>
+    <select id="sortOrder">
+      <option value="title">Sort by Title</option>
+      <option value="year">Sort by Year</option>
+      <option value="author">Sort by Author</option>
+    </select>
+  </div>
+
+  <!-- Results Count -->
+  <div class="results-info">
+    <span id="resultsCount">Loading...</span>
+  </div>
+
+  <!-- Book Grid -->
+  <div class="library-grid" id="libraryGrid">
+    <!-- Cards injected by JavaScript -->
+  </div>
+
+  <footer>
+    <p>© 2024 My Digital Library · Built with HTML & Google Sites</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
