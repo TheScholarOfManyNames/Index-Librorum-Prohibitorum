@@ -59,8 +59,12 @@ function renderLibrary(books) {
         <h3>${book.title}</h3>
         <p class="author">by ${book.author} · ${book.year}</p>
         <span class="category">${book.category}</span>
+        ${book.fileType ? `<span class="file-badge">${book.fileType}${book.fileSize ? ' · ' + book.fileSize : ''}</span>` : ''}
         <p class="description">${book.description}</p>
-        <a href="${book.link}" target="_blank">Open Book →</a>
+        <div class="card-actions">
+          <a href="${book.link}" target="_blank">Open →</a>
+          ${book.fileType ? `<a href="${book.link}" download class="btn-download">⬇ Download</a>` : ''}
+        </div>
       </div>
     </div>
   `).join('');
