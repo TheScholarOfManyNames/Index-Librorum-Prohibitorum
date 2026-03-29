@@ -3,11 +3,33 @@ let allBooks = [];
 // Fetch data from JSON file
 async function loadLibrary() {
   try {
-    const response = await fetch('./data/books.json');
-    allBooks = await response.json();
+    const base = window.location.href.replace(/\/[^/]*$/, '/');
+    const response = await fetch(base + 'data/books.json');
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Debug line — check your browser console to see what shape data is
+    console.log('Data received:', data);
+
+    // Handle both a plain array and a wrapped object
+    if (Array.isArray(data)) {
+      allBooks = data;                  // ✅ Already an array
+    } else if (Array.isArray(data.books)) {
+      allBooks = data.books;            // ✅ Unwrap { "books": [...] }
+    } else {
+      throw new Error(`Expected an array but got: ${typeof data}`);
+    }
+
     renderLibrary(allBooks);
+
   } catch (error) {
     console.error('Could not load library data:', error);
+    document.getElementById('libraryGrid').innerHTML =
+      `<div class="no-results">⚠️ Could not load library. Error: ${error.message}</div>`;
   }
 }
 
@@ -15,10 +37,18 @@ async function loadLibrary() {
 function renderLibrary(books) {
   const grid = document.getElementById('libraryGrid');
   const count = document.getElementById('resultsCount');
+
+  // Guard — if books isn't an array, stop here cleanly
+  if (!Array.isArray(books)) {
+    console.error('renderLibrary expected an array, got:', books);
+    grid.innerHTML = `<div class="no-results">⚠️ Library data is malformed.</div>`;
+    return;
+  }
+
   count.textContent = `Showing ${books.length} item${books.length !== 1 ? 's' : ''}`;
 
   if (books.length === 0) {
-    grid.innerHTML = `<div class="no-results">📭 No results found. Try a different search.</div>`;
+    grid.innerHTML = `<div class="no-results">📭 No results found.</div>`;
     return;
   }
 
@@ -29,12 +59,8 @@ function renderLibrary(books) {
         <h3>${book.title}</h3>
         <p class="author">by ${book.author} · ${book.year}</p>
         <span class="category">${book.category}</span>
-        ${book.fileType ? `<span class="file-badge">${book.fileType} · ${book.fileSize || ''}</span>` : ''}
         <p class="description">${book.description}</p>
-        <div class="card-actions">
-          <a href="${book.link}" target="_blank">Open →</a>
-          ${book.fileType ? `<a href="${book.link}" download class="btn-download">⬇ Download</a>` : ''}
-        </div>
+        <a href="${book.link}" target="_blank">Open Resource →</a>
       </div>
     </div>
   `).join('');
