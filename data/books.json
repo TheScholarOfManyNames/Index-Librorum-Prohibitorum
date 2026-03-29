@@ -1,12 +1,14 @@
-{
-  "id": 1,
-  "title": "1984",
-  "author": "George Orwell",
-  "category": "Literature",
-  "year": 1949,
-  "description": "A Vietnamese translation of Goerge Orwell",
-  "link": "./books/1984-tieng-Viet.pdf",
-  "cover": "./assets/images/1984.jpg",
-  "fileType": "PDF",
-  "fileSize": "1.76 MB"
-}
+[
+  {
+    "id": 1,
+    "title": "1984",
+    "author": "George Orwell",
+    "category": "Literature",
+    "year": 1949,
+    "description": "A Vietnamese translation of Goerge Orwell",
+    "link": "./books/1984-tieng-Viet.pdf",
+    "cover": "./assets/images/1984.jpg",
+    "fileType": "PDF",
+    "fileSize": "1.76 MB"
+  }
+]
