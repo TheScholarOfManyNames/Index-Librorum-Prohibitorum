@@ -99,7 +99,8 @@ function applyFilters() {
   filtered.sort((a, b) => {
     if (sort === 'year')   return b.year - a.year;
     if (sort === 'author') return a.author.localeCompare(b.author);
-    return a.title.localeCompare(b.title);
+    if (sort === 'title')  return a.title.localeCompare(b.title);
+    return a.id - b.id; // default: original order by id
   });
 
   renderLibrary(filtered);
