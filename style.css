@@ -14,8 +14,8 @@ header {
 }
 
 header h1 { font-size: 2.5rem; margin-top: 15px; margin-bottom: 2px; }
-header h2 { font-size: 1.5rem; margin-top: 2px; margin-bottom: 10px; }
-header p  { font-size: 1rem; opacity: 0.85; margin-top: 2px ; margin-bottom: 10px}
+header h2 { font-size: 1.5rem; margin-top: 2px; margin-bottom: 2px; }
+header p  { font-size: 1rem; opacity: 0.85; margin-top: 15px ; margin-bottom: 10px}
 
 /* Controls Bar */
 .controls {
