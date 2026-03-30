@@ -174,7 +174,7 @@ footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 15px;
   color: #1877f2;
   transition: color 0.2s, transform 0.2s;
 }
