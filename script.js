@@ -6,24 +6,20 @@ async function loadLibrary() {
     const base = window.location.href.replace(/\/[^/]*$/, '/');
     const response = await fetch(base + 'data/books.json');
 
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
     const data = await response.json();
-
-    // Debug line — check your browser console to see what shape data is
     console.log('Data received:', data);
 
-    // Handle both a plain array and a wrapped object
     if (Array.isArray(data)) {
-      allBooks = data;                  // ✅ Already an array
+      allBooks = data;
     } else if (Array.isArray(data.books)) {
-      allBooks = data.books;            // ✅ Unwrap { "books": [...] }
+      allBooks = data.books;
     } else {
       throw new Error(`Expected an array but got: ${typeof data}`);
     }
 
+    populateLanguageFilter(allBooks);
     renderLibrary(allBooks);
 
   } catch (error) {
@@ -33,12 +29,24 @@ async function loadLibrary() {
   }
 }
 
+// Build language dropdown from whatever languages exist in the data
+function populateLanguageFilter(books) {
+  const select = document.getElementById('languageFilter');
+  const languages = [...new Set(books.map(b => b.language).filter(Boolean))].sort();
+
+  languages.forEach(lang => {
+    const opt = document.createElement('option');
+    opt.value = lang;
+    opt.textContent = lang;
+    select.appendChild(opt);
+  });
+}
+
 // Render book cards
 function renderLibrary(books) {
-  const grid = document.getElementById('libraryGrid');
+  const grid  = document.getElementById('libraryGrid');
   const count = document.getElementById('resultsCount');
 
-  // Guard — if books isn't an array, stop here cleanly
   if (!Array.isArray(books)) {
     console.error('renderLibrary expected an array, got:', books);
     grid.innerHTML = `<div class="no-results">⚠️ Library data is malformed.</div>`;
@@ -59,7 +67,8 @@ function renderLibrary(books) {
         <h3>${book.title}</h3>
         <p class="author">by ${book.author} · ${book.year}</p>
         <span class="category">${book.category}</span>
-        ${book.fileType ? `<span class="file-badge">${book.fileType}${book.fileSize ? ' · ' + book.fileSize : ''}</span>` : ''}
+        ${book.language  ? `<span class="language-badge">${book.language}</span>` : ''}
+        ${book.fileType  ? `<span class="file-badge">${book.fileType}${book.fileSize ? ' · ' + book.fileSize : ''}</span>` : ''}
         <p class="description">${book.description}</p>
         <div class="card-actions">
           <a href="${book.link}" target="_blank">Open →</a>
@@ -73,20 +82,22 @@ function renderLibrary(books) {
 // Filter and sort
 function applyFilters() {
   const query    = document.getElementById('searchInput').value.toLowerCase();
+  const language = document.getElementById('languageFilter').value;
   const category = document.getElementById('categoryFilter').value;
   const sort     = document.getElementById('sortOrder').value;
 
   let filtered = allBooks.filter(book => {
     const matchesSearch   = book.title.toLowerCase().includes(query) ||
                             book.author.toLowerCase().includes(query);
+    const matchesLanguage = language === 'all' || book.language === language;
     const matchesCategory = category === 'all' || book.category === category;
-    return matchesSearch && matchesCategory;
+    return matchesSearch && matchesLanguage && matchesCategory;
   });
 
   filtered.sort((a, b) => {
     if (sort === 'year')   return b.year - a.year;
     if (sort === 'author') return a.author.localeCompare(b.author);
-    return a.title.localeCompare(b.title); // default: title
+    return a.title.localeCompare(b.title);
   });
 
   renderLibrary(filtered);
@@ -94,6 +105,7 @@ function applyFilters() {
 
 // Event Listeners
 document.getElementById('searchInput').addEventListener('input', applyFilters);
+document.getElementById('languageFilter').addEventListener('change', applyFilters);
 document.getElementById('categoryFilter').addEventListener('change', applyFilters);
 document.getElementById('sortOrder').addEventListener('change', applyFilters);
 
