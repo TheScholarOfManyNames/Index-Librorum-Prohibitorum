@@ -1,2 +1,2 @@
-# Bibliotheca Prohibita
-A digital library for forbidden works and forbidden knowledge
+# Index Librorum Prohibitorum
+A collection of forbidden works and forbidden knowledge
