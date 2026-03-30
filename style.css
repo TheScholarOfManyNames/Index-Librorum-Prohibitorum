@@ -126,7 +126,7 @@ header p  { font-size: 1rem; opacity: 0.85; margin-top: 15px ; margin-bottom: 10
 
 footer {
   text-align: center;
-  padding: 24px;
+  padding: 24px 24px 10px;
   background: #fff;
   color: #999;
   font-size: 0.85rem;
