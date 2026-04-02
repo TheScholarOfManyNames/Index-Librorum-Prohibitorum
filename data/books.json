@@ -76,5 +76,37 @@
     "cover": "./assets/images/TheGioiMoiTuoiDep.jpg",
     "fileType": "PDF",
     "fileSize": "1.95 MB"
+  },
+  {
+    "id": 7,
+    "title": "The Prince",
+    "author": "Niccolò Machiavelli",
+    "categories": [
+      "Philosophy",
+      "Politics"
+    ],
+    "year": 1532,
+    "description": "Written in the shadow of political exile, Machiavelli's slim but seismic treatise strips power of its moral pretense and examines it as a cold, practical science. Addressed to a prince who wishes to seize and hold dominion, it delivers timeless — and often ruthless — counsel on statecraft, the nature of fortune, and the calculated use of force. Few books have been more condemned, more misread, and more quietly studied by those who hold power than Machiavelli's The Prince.",
+    "language": "English",
+    "link": "./books/ThePrince.pdf",
+    "cover": "./assets/images/ThePrince.jpg",
+    "fileType": "PDF",
+    "fileSize": "828 KB"
+  },
+  {
+    "id": 8,
+    "title": "Quân Vương",
+    "author": "Niccolò Machiavelli",
+    "categories": [
+      "Philosophy",
+      "Politics"
+    ],
+    "year": 1532,
+    "description": "Được viết trong bóng tối của cuộc lưu đày chính trị, luận thuyết ngắn nhưng chấn động của Machiavelli lột bỏ lớp vỏ đạo đức của quyền lực và phân tích nó như một khoa học lạnh lùng và thực dụng. Gửi đến bậc quân vương khao khát nắm giữ quyền lực, tác phẩm đưa ra những lời khuyên vừa trường tồn vừa không khoan nhượng về thuật trị quốc, bản chất của vận may và sự tất yếu của vũ lực. Ít có cuốn sách nào từng bị lên án nhiều hơn, bị hiểu lầm nhiều hơn — và cũng như được bí mật học hỏi bởi những người đang nắm quyền nhiều hơn Quân Vương của Machiavelli.",
+    "language": "Vietnamese",
+    "link": "./books/QuanVuong.pdf",
+    "cover": "./assets/images/QuanVuong.jpg",
+    "fileType": "PDF",
+    "fileSize": "1.23 MB"
   }
 ]
